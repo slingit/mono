@@ -43,7 +43,6 @@ namespace Sling.Desktop.Dialogs
                 writer.WriteLine("Version: " + Program.Version + writer.NewLine);
 
                 writer.WriteLine("Exception Information");
-                writer.WriteLine("HRESULT: 0x" + exception.HResult.ToString("X4"));
                 writer.WriteLine(exception.ToString() + writer.NewLine);
 
                 if (chkPlatform.Checked) {

@@ -45,40 +45,27 @@ namespace Sling.Desktop {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // detect platform
-            PlatformID platformID = DetectPlatform();
+            // try and load
+            try {
+                // detect platform
+                PlatformID platformID = DetectPlatform();
 
-            // create platform interface
-            IPlatform platform = null;
+                // create platform interface
+                IPlatform platform = null;
 
-            if (platformID == PlatformID.Win32NT)
-                platform = new Sling.Windows.Platform();
-            else
-                MessageBox.Show("The current host platform is not supported by Sling", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (platformID == PlatformID.Win32NT)
+                    platform = new Sling.Windows.Platform();
+                else
+                    MessageBox.Show("The current host platform is not supported by Sling", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            // create engine
-            engine = new Engine(platform);
-            engine.Console.WriteLine("[sling] initialized engine on " + platformID.ToString());
+                // create engine
+                engine = new Engine(platform);
+                engine.Console.WriteLine("[sling] initialized engine on " + platformID.ToString());
 
-
-
-
-
-
-
-
-
-
-
-            IScripting scripting = engine.Scripting;
-
-            scripting.RegisterFunction("Test", new Func<string, double, bool, string[]> (delegate(string str, double num, bool boolean) {
-                engine.Console.WriteLine(str + " : " + num + " : " + boolean);
-                return new string[] { "hey", "wow", "cool" };
-            }).Method, null);
-
-            scripting.Execute("lol = Test([[wow]], 5.5, false)");
-            object[] o = (object[])scripting.GetGlobal("lol");
+                throw new Exception("Windows XP compatability - How bad was android again?");
+            } catch (Exception ex) {
+                Error(ex);
+            }
 
             // run application
             //Application.Run(new DeviceCreate());
