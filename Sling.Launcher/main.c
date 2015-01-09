@@ -18,6 +18,7 @@ int entry() {
 
 		if (install) {
 			framework_install();
+			framework_launch();
 		}
 	} else {
 		framework_launch();

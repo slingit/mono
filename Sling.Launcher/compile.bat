@@ -1,6 +1,10 @@
 @echo off
 
 set libs=-luser32 -ladvapi32 -lkernel32
+set out=Sling.Launcher.exe
+
+mkdir bin
+mkdir obj
 
 cls
 echo ==========================================
@@ -17,8 +21,8 @@ tcc -c -o obj/main.o main.c
 echo Compiling win_check.c
 tcc -c -o obj/win_check.o win_check.c
 
-tcc -o bin/Sling.Launcher.exe obj/main.o obj/win_check.o %libs% || goto link_fail
+tcc -o bin/%out% obj/main.o obj/win_check.o %libs% || goto link_fail
 echo Linking successful!
-bin\Sling.Launcher.exe
+bin\%out%
 
 :link_fail
